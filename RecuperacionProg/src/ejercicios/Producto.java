@@ -5,7 +5,10 @@ public class Producto implements Comparable<Producto> {
 	protected String nombre;
 	protected double precio;
 
-	
+	/**
+	 * 
+	 * @param nombre
+	 */
 	public Producto(String nombre) {
 		if (nombre != null && !nombre.isEmpty()) {
 			this.nombre = nombre;
@@ -25,26 +28,47 @@ public class Producto implements Comparable<Producto> {
 		}
 	}
 
+	/**
+	 * 
+	 * @return nombre del producto
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * 
+	 * @param nombre
+	 */
 	public void setNombre(String nombre) {
 		if (nombre != null && !nombre.isEmpty()) {
 			this.nombre = nombre;
 		}
 	}
 
+	/**
+	 * 
+	 * @return precio del producto
+	 */
 	public double getPrecio() {
 		return precio;
 	}
 
+	/**
+	 * 
+	 * @param precio
+	 */
 	public void setPrecio(double precio) {
 		if (precio >= 0) {
 			this.precio = precio;
 		}
 	}
 
+	/**
+	 * 
+	 * @param cantidad
+	 * @return precio por la cantidad
+	 */
 	public double calcular(int cantidad) {
 		return this.precio * cantidad;
 	}

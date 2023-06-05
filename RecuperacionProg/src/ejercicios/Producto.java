@@ -5,6 +5,13 @@ public class Producto implements Comparable<Producto> {
 	protected String nombre;
 	protected double precio;
 
+	
+	public Producto(String nombre) {
+		if (nombre != null && !nombre.isEmpty()) {
+			this.nombre = nombre;
+		}
+	}
+	
 	/**
 	 * @param nombre
 	 * @param precio

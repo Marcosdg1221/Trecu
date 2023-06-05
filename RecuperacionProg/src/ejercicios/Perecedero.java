@@ -31,20 +31,22 @@ public class Perecedero extends Producto {
 		}
 	}
 
-	public double calcular(int cantidad, int diasCaducar) {
+	@Override
+	public double calcular(int cantidad) {
 		double precioDef;
-		switch (diasCaducar) {
+		double spPrecio=super.calcular(cantidad);
+		switch (díasCaducar) {
 		case 1:
-			precioDef = (this.precio * cantidad) / 4;
+			precioDef = spPrecio / 4;
 			break;
 		case 2:
-			precioDef = (this.precio * cantidad) / 3;
+			precioDef = spPrecio / 3;
 			break;
 		case 3:
-			precioDef = (this.precio * cantidad) / 2;
+			precioDef = spPrecio / 2;
 			break;
 		default:
-			precioDef = this.precio * cantidad;
+			precioDef = spPrecio;
 		}
 		return precioDef;
 	}

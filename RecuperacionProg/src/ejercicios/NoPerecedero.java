@@ -2,7 +2,7 @@ package ejercicios;
 
 public class NoPerecedero extends Producto {
 
-	private String tipo;
+	private String tipo="";
 
 	public NoPerecedero(String nombre, double precio, String tipo) {
 		super(nombre, precio);

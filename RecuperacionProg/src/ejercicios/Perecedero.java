@@ -5,6 +5,7 @@ public class Perecedero extends Producto {
 	private int díasCaducar;
 
 	/**
+	 * Comprueba de que los valores sean correctos; el precio y los días deben ser positivos, y el nombre no debe estar vacío.
 	 * @param nombre
 	 * @param precio
 	 */
@@ -25,6 +26,10 @@ public class Perecedero extends Producto {
 		return díasCaducar;
 	}
 
+	/**
+	 * comprueba de que los días sean positivos.
+	 * @param díasCaducar
+	 */
 	public void setDíasCaducar(int díasCaducar) {
 		if (díasCaducar >= 0) {
 			this.díasCaducar = díasCaducar;

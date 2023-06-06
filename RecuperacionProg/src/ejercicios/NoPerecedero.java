@@ -4,6 +4,12 @@ public class NoPerecedero extends Producto {
 
 	private String tipo="";
 
+	/**
+	 * Comprueba también de que los valores sean correctos (nombre no nulo, precio positivo, tipo no vacío, etc...)
+	 * @param nombre
+	 * @param precio
+	 * @param tipo
+	 */
 	public NoPerecedero(String nombre, double precio, String tipo) {
 		super(nombre, precio);
 		if (nombre != null && !nombre.isEmpty()) {
@@ -16,25 +22,24 @@ public class NoPerecedero extends Producto {
 			this.tipo = tipo;
 		}
 	}
-
 	/**
-	 * @param nombre
-	 * @param precio
+	 * 
+	 * @param tipo , si el tipo no está vacío.
 	 */
-	public double calcular(int cantidad) {
-		return this.precio * cantidad;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
 	public void setTipo(String tipo) {
 		if (nombre != null && !nombre.isEmpty()) {
 		this.tipo = tipo;
 		}
 	}
 
+	/**
+	 * 
+	 * @return el tipo del producto se devuelve aquí.
+	 */
+	public String getTipo() {
+		return tipo;
+	}
+	
 	@Override
 	public String toString() {
 		return super.toString() + "Tipo: " + tipo;

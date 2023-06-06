@@ -7,7 +7,7 @@ public class Producto implements Comparable<Producto> {
 
 	/**
 	 * 
-	 * @param nombre
+	 * @param nombre; comprobando que no es vacío.
 	 */
 	public Producto(String nombre) {
 		if (nombre != null && !nombre.isEmpty()) {
@@ -16,8 +16,8 @@ public class Producto implements Comparable<Producto> {
 	}
 	
 	/**
-	 * @param nombre
-	 * @param precio
+	 * @param nombre, comprobando que no esté vacío ni null
+	 * @param precio, comprobando que el valor sea 0 o más
 	 */
 	public Producto(String nombre, double precio) {
 		if (nombre != null && !nombre.isEmpty()) {
@@ -30,15 +30,7 @@ public class Producto implements Comparable<Producto> {
 
 	/**
 	 * 
-	 * @return nombre del producto
-	 */
-	public String getNombre() {
-		return nombre;
-	}
-
-	/**
-	 * 
-	 * @param nombre
+	 * @param nombre, si el nombre es vacío o null no hace nada
 	 */
 	public void setNombre(String nombre) {
 		if (nombre != null && !nombre.isEmpty()) {
@@ -56,7 +48,7 @@ public class Producto implements Comparable<Producto> {
 
 	/**
 	 * 
-	 * @param precio
+	 * @param precio, comprobando que el precio sea positivo o 0
 	 */
 	public void setPrecio(double precio) {
 		if (precio >= 0) {
@@ -71,6 +63,14 @@ public class Producto implements Comparable<Producto> {
 	 */
 	public double calcular(int cantidad) {
 		return this.precio * cantidad;
+	}
+	
+	/**
+	 * 
+	 * @return nombre del producto
+	 */
+	public String getNombre() {
+		return nombre;
 	}
 
 	public boolean equals(Object objeto) {

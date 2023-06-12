@@ -49,4 +49,45 @@ public class Main {
 		} while (opcion != 0);
 		all.close();
 	}
+	
+		private static void escrituraFichero() {
+
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio1\\Producto"));
+			// recorre la tabla
+			for (Producto p : productos) {
+
+				bw.write(p.nombre + ";" + p.precio + ";");
+
+				// mirar si el producto es perecedero
+				if (p instanceof Perecedero) {
+					Perecedero per = (Perecedero) p; // el objeto creado sera
+
+					bw.write(String.valueOf(per.getCaducar()));
+
+				}
+
+				else if (p instanceof NoPerecedero) {
+					NoPerecedero noper = (NoPerecedero) p; // el objeto creado sera
+
+					bw.write(noper.getTipo());
+
+				}
+
+				bw.newLine();
+				bw.flush();
+
+			}
+
+		} catch (IOException e) {
+
+			System.out.println("Error en la apertura del fichero");
+
+			System.out.println(e.getMessage());
+
+		}
+	}
 }
+
+
+

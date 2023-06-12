@@ -2,10 +2,11 @@ package ejercicios;
 
 import java.util.Scanner;
 import java.util.TreeSet;
+import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		String nombreProducto = "";
 		String tipoProducto = "";
 		double precioProducto = 0;
@@ -18,140 +19,25 @@ public class Main {
 
 		do {
 			System.out.println("1. Añadir producto" + "\n" + "2.Listar productos" + "\n" + "3.Eliminar producto" + "\n"
-					+ "4.Modificar producto" + "\n" + "0.Salir");
+					+ "4.Modificar producto" + "\n" + "5.Guardar fichero" + "\n" + "0.Salir");
 			opcion = all.nextInt();
 			all.nextLine();
 			switch (opcion) {
 			case 1:
-				System.out.println("Introduzca el nombre del producto");
-				nombreProducto = all.next();
-				all.nextLine();
-				p = new Producto(nombreProducto);
-				if (productos.contains(p)) { // Si productos contiene un producto del mismo nombre, se cancela la opción
-												// haciéndoselo saber al usuario.
-					System.out.println("El producto ya existe");
-
-				} else {
-					System.out.println("Introduzca el precio del producto");
-					precioProducto = all.nextDouble();
-					all.nextLine();
-					do {
-						System.out.println("¿El producto es perecedero o noPerecedero?"); // Si no metes nada, se añade
-						System.out.println("Por favor, sólo introduzca perecedero o noPerecedero"); // Condición
-						// vacío extremo
-						tipoProducto = all.next();
-						all.nextLine();
-
-					} while (!tipoProducto.equalsIgnoreCase("perecedero")
-							&& !tipoProducto.equalsIgnoreCase("noperecedero"));
-					if (tipoProducto.equalsIgnoreCase("perecedero")) {
-						System.out.println("¿Cuántos días tiene para que caduque?");
-						diasCaducar = all.nextInt();
-						all.nextLine();
-
-						// Aquí ya sí que sí, dentro de p, añado en el objeto el precio y los días
-						// también.
-
-						p = new Perecedero(nombreProducto, precioProducto, diasCaducar);
-
-					} else if (tipoProducto.equalsIgnoreCase("noperecedero")) { // Si es noPerecedero, se ejecuta esta
-																				// acción
-						System.out.println("Introduzca el tipo");
-						tipo = all.next();
-						all.nextLine();
-
-						// Lo mismo que con Perecedero pero con tipo en lugar de los días de caducación.
-
-						p = new NoPerecedero(nombreProducto, precioProducto, tipo);
-
-					}
-					productos.add(p);
-					System.out.println("El producto se añadió");
-
-				}
+				
+				Funciones.añadirProducto(nombreProducto, p, productos, precioProducto, tipoProducto, diasCaducar, tipo);
 				break;
 			case 2: // Esto simplemente imprime la lista de los productos.
-				if (productos.size() == 0) {
-					System.out.println("No hay productos" + "\n");
-				} else {
-					for (Producto i : productos) { // For each para que me vaya recorriendo la tabla de lo que contenga.
-						System.out.println(i);
-					}
-				}
+				Funciones.listar(productos);
 				break;
-
 			case 3:
-				System.out.println("Introduzca el nombre del producto a eliminar");
-				nombreProducto = all.next(); // crear un producto nombre; esto sin más te elimina el último añadido
-				all.nextLine();
-				p = new Producto(nombreProducto);
-				if (productos.remove(p)) { // Si contiene el producto p con su nombre, no se hace nada, si no, se
-											// elimina
-					System.out.println("Producto eliminado" + "\n");
-				} else {
-					System.out.println("El producto no existe");
-				}
+				Funciones.eliminarProducto(productos, nombreProducto, p);
 				break;
-
 			case 4:
-				System.out.println("Introduzca el nombre del producto a modificar");
-				nombreProducto = all.next();
-				int opcion2 = 0; // Importante tener esto para después preguntar qué se quiere modificar
-				all.nextLine();
-				p = new Producto(nombreProducto);
-				if (productos.contains(p)) { // ?
-					System.out.println("¿Qué dato del producto desea modificar?");
-
-					// TODO Si el producto no es perecedero, imprimir un menu, y si lo es, imprimir
-					// otro menu (piden otro tipo de datos)
-
-					System.out.println("1. El precio del producto"); // Esto se va a imprimir sí o sí en ambos tipos del
-																		// producto
-					for (Producto product : productos) {
-						if (product.equals(p)) { // Comprueba si algún producto es equivalente al nombre que se
-													// introdujo
-
-							if (product instanceof NoPerecedero) { // Si NO es perecedero
-
-								System.out.println("2.El tipo");
-							} else if (product instanceof Perecedero) {
-								System.out.println("2. Los días de caducación");
-							}
-							// Acaba el menú aquí
-
-							// Comprobación de la opción elegida
-							do {
-								if (opcion2 != 0) { // Para que en la primera vez no imprima opción no válida sin que el
-													// usuario no haya puesto nada.
-									System.out.println("opción no válida");
-								}
-								opcion2 = all.nextInt();
-								all.nextLine();
-							} while (opcion2 != 1 && opcion2 != 2);
-
-							if (opcion2 == 1) { // Modificar el precio del producto
-								System.out.println("Introduzca el precio");
-								product.setPrecio(all.nextDouble());
-								System.out.println("producto modificado");
-							} else {
-								if (product instanceof Perecedero) {
-									System.out.println("Introduzca los días a caducar");
-									Perecedero per = (Perecedero) product;
-									per.setDíasCaducar(all.nextInt());
-									System.out.println("producto modificado");
-								} else if (product instanceof NoPerecedero) {
-									System.out.println("Introduzca el tipo");
-									NoPerecedero noper = (NoPerecedero) product;
-									noper.setTipo(all.next());
-									System.out.println("producto modificado");
-								}
-							}
-
-						}
-					}
-				} else {
-					System.out.println("El producto no existe");
-				}
+				Funciones.modificarProducto(nombreProducto, p, productos, precioProducto);
+				break;
+			case 5:
+				Funciones.guardar(productos);
 				break;
 			case 0: // Sale con la opción 0
 				System.out.println("Salida");

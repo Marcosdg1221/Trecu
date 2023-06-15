@@ -2,21 +2,32 @@ package ejercicios2;
 
 public class Lavadora extends Electrodomestico {
 
+	/**
+	 * Atributo carga para lavadora y es un int
+	 */
 	private int carga = 5;
 
 	/**
-	 * Constructor con los parámetros heredados y la carga
-	 * 
+	 * Constructor por defecto
+	 */
+	protected Lavadora() {
+		super();
+	}
+
+	/**
 	 * @param codigo
 	 * @param precioBase
-	 * @param color
-	 * @param consumo
 	 * @param peso
-	 * @param carga
+	 * @param colores
+	 * @param consumacion
 	 */
-	public Lavadora(String codigo, double precioBase, String color, char consumo, int peso, int carga) {
-		super(codigo, precioBase, color, consumo, peso);
-		this.carga = carga;
+	protected Lavadora(String codigo, double precioBase, int peso, String colores, char consumacion) {
+		super(codigo, precioBase, peso, colores, consumacion);
+		this.codigo=codigo;
+		this.precioBase=precioBase;
+		this.peso=peso;
+		this.color=Color.valueOf(colores);
+		this.consumacion=Consumo.valueOf(String.valueOf(consumacion));
 	}
 
 	/**
@@ -43,12 +54,7 @@ public class Lavadora extends Electrodomestico {
 		this.peso = peso;
 	}
 
-	/**
-	 * Constructor defecto
-	 */
-	public Lavadora() {
 
-	}
 
 	/**
 	 * Get de la carga de la lavadora
@@ -79,7 +85,7 @@ public class Lavadora extends Electrodomestico {
 	@Override
 	public String toString() {
 		return "Lavadora " + "\n" + "Codigo: " + "Precio base: " + precioBase + "\n" + "Color: " + color + "\n"
-				+ "Consumo energético: " + consumo + "\n" + "Peso :" + "\n" + "Carga: " + carga;
+				+ "Consumo energético: " + consumacion + "\n" + "Peso :" + "\n" + "Carga: " + carga;
 	}
 
 }

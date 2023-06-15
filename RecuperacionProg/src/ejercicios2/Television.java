@@ -1,83 +1,82 @@
 package ejercicios2;
 
+import ejercicios2.Electrodomestico.Color;
+import ejercicios2.Electrodomestico.Consumo;
+
 public class Television extends Electrodomestico{
 
+	/**
+	 * resolucion de la television es un int
+	 */
 	private int resolucion=20;
-	private boolean TDT=false;
+	/**
+	 * tdt de la tele es un boolean, por defecto false
+	 */
+	private boolean tdt=false;
 	
 	/**
-	 * 
+	 * Constructor por defecto
 	 */
-	public Television() {
+	protected Television() {
 		super();
-		
 	}
+
+	/**
+	 * Constructor con todos los atributos de television
+	 * @param codigo
+	 * @param precioBase
+	 * @param peso
+	 * @param colores
+	 * @param consumacion
+	 * @param resolucion
+	 * @param tdt
+	 */
+	protected Television(String codigo, double precioBase, int peso, String colores, char consumacion, int resolucion, boolean tdt) {
+		super(codigo, precioBase, peso, colores, consumacion);
+		this.codigo=codigo;
+		this.precioBase=precioBase;
+		this.peso=peso;
+		this.color=Color.valueOf(colores);
+		this.consumacion=Consumo.valueOf(String.valueOf(consumacion));
+		this.resolucion=resolucion;
+		this.tdt=tdt;
+	}
+
 	/**
 	 * @param codigo
 	 * @param precioBase
 	 * @param peso
 	 */
-	public Television(String codigo, double precioBase, int peso) {
+	protected Television(String codigo, double precioBase, int peso) {
 		super(codigo, precioBase, peso);
 		this.codigo=codigo;
 		this.precioBase=precioBase;
 		this.peso=peso;
 	}
-	/**
-	 * @param codigo
-	 * @param precioBase
-	 * @param color
-	 * @param consumo
-	 * @param peso
-	 */
-	public Television(String codigo, double precioBase, String color, char consumo, int peso) {
-		super(codigo, precioBase, color, consumo, peso);
-		this.codigo=codigo;
-		this.precioBase=precioBase;
-		this.color=color;
-		this.consumo=consumo;
-		this.peso=peso;
-	}
+
 	/**
 	 * @param codigo
 	 */
-	public Television(String codigo) {
+	protected Television(String codigo) {
 		super(codigo);
-		this.codigo=codigo;
 	}
-	/**
-	 * 
-	 * @return resolucion de la television
-	 */
+
 	public int getResolucion() {
 		return resolucion;
 	}
-	/**
-	 * Set resolucion de la television
-	 * @param resolucion
-	 */
+
 	public void setResolucion(int resolucion) {
 		this.resolucion = resolucion;
 	}
-	
-	/**
-	 * Get de TDT
-	 * @return verdadero o falso si tiene o no TDT
-	 */
-	public boolean getTDT() {
-		return TDT;
+
+	public boolean getTdt() {
+		return tdt;
 	}
-	/**
-	 * Set el tdt
-	 * @param tDT de la television
-	 */
-	public void setTDT(boolean tDT) {
-		TDT = tDT;
+
+	public void setTdt(boolean tdt) {
+		this.tdt = tdt;
 	}
-	
-	/**
-	 * Incrementa el precio base un 30% si la resolucion es mayor a 40 pulgadas
-	 */
+
 	@Override
 	public void precioFinal() {
 		if (resolucion>40) {
@@ -91,10 +90,7 @@ public class Television extends Electrodomestico{
 	 */
 	@Override
 	public String toString() {
-		return "Television " + "\n" + "Codigo: " + codigo +"\n" +"Precio Base: " + precioBase + "\n" + "Color: " + color + "\n" + "Consumo energético: " + consumo + "\n" + "Peso: " + peso + "\n" + "Resolución: " + resolucion + "\n" + "Sintonizador TDT: " + TDT ;
+		return "Television " + "\n" + "Codigo: " + codigo +"\n" +"Precio Base: " + precioBase + "\n" + "Color: " + color + "\n" + "Consumo energético: " + consumacion + "\n" + "Peso: " + peso + "\n" + "Resolución: " + resolucion + "\n" + "Sintonizador TDT: " + tdt ;
 	}
 
-	
-	
-	
 }
